@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript" src="js/applicaiton.js"></script>
+    <style type="text/css">
+        #c {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<canvas  id="c" width="500" height="1000">
+
+</canvas>
+<script type="text/javascript">
+    var resourceLoader = new g.system.ResourceLoader();
+    var resources = [
+        {id:'runleft', src: 'img/runleft.png'},
+        {id:'runright', src: 'img/runright.png'},
+        {id:'idleleft', src: 'img/idleleft.png'},
+        {id:'pea', src: "img/PeaShadow.png"}
+    ];
+    resourceLoader.load(resources, function(){
+        var me = this;
+        var canvas = document.getElementById("c");
+
+        var world = new g.game.World({
+            stage: {
+                canvas: canvas
+            },
+            gravity: new g.geom.Vector(0, 800)
+        });
+        var wall1 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 1000,
+                height:1,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            friction: new g.geom.Vector(1, 0),
+            position: new g.geom.Point(0, 1000),
+            sleep: true
+        });
+        var wall2 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 1,
+                height:1000,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            position: new g.geom.Point(0, 0),
+            sleep: true
+        });
+        var wall3 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 1,
+                height:1000,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            position: new g.geom.Point(500, 0),
+            sleep: true
+        });
+        var wall4 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 1000,
+                height:1,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            position: new g.geom.Point(0, 100),
+            sleep: true
+        });
+        var box1 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 200,
+                height: 50,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            friction: new g.geom.Vector(1, 0),
+            position: new g.geom.Point(200, 200),
+            sleep: true
+        });
+        var box2 = new g.game.GameObject({
+            displayObject: {
+                type: 'Rectangle',
+                width: 200,
+                height: 50,
+                recStyle: {
+                    strokeStyle: "black",
+                    lineWidth: 1
+                }
+            },
+            size: 5,
+            friction: new g.geom.Vector(1, 0),
+            position: new g.geom.Point(100, 500),
+            sleep: true
+        });
+        var player = new g.game.GameObject({
+            displayObject: {
+                type: 'MovieClip',
+                img: this.getImageDataById("idleleft"),
+                width: 258,
+                height: 48,
+                totalFrame:6
+            },
+            collisionDecrease: true,
+            size: 50,
+            velocity: new g.geom.Vector(0, 0),
+            position: new g.geom.Point(200, 150)
+        });
+        world.add(box1);
+        world.add(box2);
+        world.add(wall1);
+        world.add(wall2);
+        world.add(wall3);
+        world.add(wall4);
+        world.add(player);
+        var keyBoard = new g.system.KeyBoard();
+        keyBoard.init();
+        keyBoard.addEventListener(g.events.ON_KEY_PRESS, function(e){
+            var v = player.getNextVelocity();
+            var keyCode = e.keyCode;
+            switch(keyCode){
+                case 87: {
+                    v.y = -200;
+                    break;
+                }
+                case 90: {
+                    v.x*= -1;
+                    break;
+                }
+                case 65: {
+                    v.x-= 10;
+                    break;
+                }
+                case 68: {
+                    v.x+= 10;
+                    break;
+                }
+            }
+        });
+        player.addEventListener(g.events.ON_COLLIDE_SLEEP, function(e){
+            var direction = e.direction;
+            var v = e.velocity;
+            if(direction == g.geom.Collision.HORIZONTAL){
+              //  v.y -= 20;
+            }
+           // this.setSleep(true);
+
+        });
+        world.init();
+    });
+</script>
+</body>
+</html>
