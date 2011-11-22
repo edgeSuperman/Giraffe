@@ -23,7 +23,7 @@ var files = [
 
 
         "js/Giraffe/system/ResourceLoader.js",
-        "js/Giraffe/system/Machine.js",
+        "js/Giraffe/system/machine.js",
         "js/Giraffe/system/KeyBoard.js",
 
         "js/Giraffe/display/DisplayObject.js",

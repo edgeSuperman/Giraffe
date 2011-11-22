@@ -72,7 +72,7 @@
                         totalFrame: me._totalFrame
                     });
                     me._totalFrame++;
-                 //  me.clear();
+                    me.clear();
                     me.dispatchEvent(g.events.ON_FRAME ,{
                         context: me._ctx,
                         totalFrame: me._totalFrame

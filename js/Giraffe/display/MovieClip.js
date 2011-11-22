@@ -22,6 +22,7 @@
                         me.dispatchEvent(g.events.ON_BEFORE_DRAW);
                         me.draw();
                         
+                        me.dispatchEvent(g.events.ON_AFTER_DRAW);
                         me.dispatchEvent(g.events.ON_ENTER_FRAME, me._currentFrame, me._totalFrame);
                     };
 

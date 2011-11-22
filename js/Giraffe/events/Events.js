@@ -17,6 +17,7 @@
         ON_FRAME: "onFrame",
         ON_READY: "onReady",
         ON_BEFORE_DRAW: "onBeforeDraw",
+        ON_AFTER_DRAW: "onAfterDraw",
         ResourceLoader: {
             ONE_LOADED: "oneloaded"
         },
