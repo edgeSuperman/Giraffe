@@ -56,11 +56,30 @@
 
 				//calculate the accelaration
 				var acceleration = e.acceleration;
-				var currentPosition = e.currentPosition;
 				var collisionTo = this.getCollisionTo();
 				for(var i = 0, len = collisionTo.length; i < len; i++){
-					var collider = collisionTo[i];
-					console.log(collider);
+					var colliderInfo = collisionTo[i];
+					var direction  = colliderInfo.direction;					
+					var collider = colliderInfo.collider;
+					switch(direction){
+						case g.geom.Collision.TOP: {
+							acceleration.y = 0;
+							break;
+						}
+						case g.geom.Collision.BOTTOM: {
+							acceleration.y = 0;
+							break;
+						}
+						case g.geom.Collision.LEFT: {
+							acceleration.x = 0;
+							break;
+						}
+						case g.geom.Collision.RIGHT: {
+							acceleration.x = 0;
+							break;
+						}
+						default: break;
+					}
 				}
 				
 			});
@@ -77,6 +96,7 @@
 		},
 		_initCollision: function() {
 			var onCollide = function(e) {
+				console.log('collide');
 				var me = this;
 				var collideDirection = e.direction;
 				var velocity = e.velocity;
@@ -87,10 +107,10 @@
 					}
 					v[attr] *= val;
 				};
-				if (collideDirection == g.geom.Collision.HORIZONTAL) {
+				if (collideDirection == g.geom.Collision.TOP || collideDirection == g.geom.Collision.BOTTOM) {
 					decreaseVelocity(velocity, 'y', 1 / 2);
 				}
-				else {
+				else if (collideDirection == g.geom.Collision.LEFT || collideDirection == g.geom.Collision.RIGHT) {
 					decreaseVelocity(velocity, 'x', 1 / 2);
 				}
 			};
@@ -177,12 +197,11 @@
 			//nextPosition's copy
 			var pos = new g.geom.Vector(position.getX(), position.getY());
 
-			var v = me._acceleration;
+			var v = me._acceleration.Copy();
 
 			var me_y = me._nextVelocity.Copy();
 			if (me.dispatchEvent(g.events.ON_CALCULATE_NEXT_POSITION, {
-				acceleration: v.Copy(),
-				currentPosition: pos
+				acceleration: v
 			})) {
 				pos.x += me_y.x * t + v.x * t * t / 2;
 				pos.y += me_y.y * t + v.y * t * t / 2;
