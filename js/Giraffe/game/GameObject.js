@@ -96,7 +96,6 @@
 		},
 		_initCollision: function() {
 			var onCollide = function(e) {
-				console.log('collide');
 				var me = this;
 				var collideDirection = e.direction;
 				var velocity = e.velocity;

@@ -59,7 +59,6 @@
 
                     //程序的主循环
                     window.RequestAnimationFrame(function(){
-                        console.log('newbegin');
                         me._run();
                     });
                     /*  setInterval(function(){

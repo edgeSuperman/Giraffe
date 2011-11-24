@@ -44,35 +44,35 @@
             },
             size: 5,
             friction: new g.geom.Vector(1, 0),
-            position: new g.geom.Point(0, 1000),
+            position: new g.geom.Point(0, 990),
             sleep: true
         });
         var wall2 = new g.game.GameObject({
             displayObject: {
                 type: 'Rectangle',
                 width: 1,
-                height:1000,
+                height:1100,
                 recStyle: {
                     strokeStyle: "black",
                     lineWidth: 1
                 }
             },
             size: 5,
-            position: new g.geom.Point(0, 0),
+            position: new g.geom.Point(10, 0),
             sleep: true
         });
         var wall3 = new g.game.GameObject({
             displayObject: {
                 type: 'Rectangle',
                 width: 1,
-                height:1000,
+                height:1100,
                 recStyle: {
                     strokeStyle: "black",
                     lineWidth: 1
                 }
             },
             size: 5,
-            position: new g.geom.Point(500, 0),
+            position: new g.geom.Point(490, 0),
             sleep: true
         });
         var wall4 = new g.game.GameObject({
@@ -86,7 +86,7 @@
                 }
             },
             size: 5,
-            position: new g.geom.Point(0, 100),
+            position: new g.geom.Point(0, 10),
             sleep: true
         });
         var box1 = new g.game.GameObject({
@@ -125,7 +125,8 @@
                 img: this.getImageDataById("idleleft"),
                 width: 258,
                 height: 48,
-                totalFrame:6
+                totalFrame:6,
+				debug: true
             },
             collisionDecrease: true,
             size: 50,
